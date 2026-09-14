@@ -1,0 +1,25 @@
+name: Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: voidzero-dev/setup-vp@v1.20.0
+        with:
+          node-version: 24
+          cache: true
+          run-install: false
+      - run: vp install --frozen-lockfile
+      - name: Check formatting
+        run: vpr format:check
+      - name: Lint
+        run: vpr lint

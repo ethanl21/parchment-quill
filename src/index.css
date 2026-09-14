@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, Consolas, monospace;
+}
+
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+/* Smooth theme flip. Durations must stay in sync with FADE_MS in lib/theme.ts. */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-fade,
+  .theme-fade *,
+  .theme-fade *::before,
+  .theme-fade *::after {
+    transition:
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease,
+      fill 0.25s ease,
+      stroke 0.25s ease;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.25s;
+  }
+}
+
+body {
+  margin: 0;
+}
+
+/* Minimal dark theme for highlight.js tokens in CodeBlock. */
+.hljs {
+  color: var(--color-stone-100);
+}
+.hljs-comment,
+.hljs-quote {
+  color: var(--color-stone-500);
+  font-style: italic;
+}
+.hljs-string {
+  color: var(--color-amber-200);
+}
+.hljs-attr,
+.hljs-attribute {
+  color: var(--color-sky-200);
+}
+.hljs-number,
+.hljs-literal {
+  color: var(--color-orange-300);
+}
+.hljs-keyword,
+.hljs-selector-tag {
+  color: var(--color-violet-300);
+}
+.hljs-title,
+.hljs-title.function_,
+.hljs-title.class_ {
+  color: var(--color-emerald-200);
+}
+.hljs-built_in,
+.hljs-type {
+  color: var(--color-teal-200);
+}
+.hljs-name,
+.hljs-section {
+  color: var(--color-rose-200);
+}
